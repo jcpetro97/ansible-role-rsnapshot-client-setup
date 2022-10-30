@@ -1,2 +1,43 @@
 ---
-# tasks file for rsnapshot-client-setup
+- name: Ubuntu - Make sure rsync is installed
+  ansible.builtin.apt:
+    name: rsync
+    state: present
+  when: ansible_distribution == "Ubuntu"
+
+- name: RedHat - Make sure rsync is installed
+  ansible.builtin.dnf:
+    name: rsync
+    state: present
+  when: ( ansible_os_family == "RedHat" ) and ( ansible_distribution_major_version >= "7" )
+  
+- name: Create rsnapshot user on client
+  ansible.builtin.user:
+    name: rsnapshot
+    comment: "limited backup user"
+    create_home: yes
+    password: '!'
+
+- name: copy ssh public key to client
+  ansible.builtin.copy:
+    src: rsnapshot.pub
+    dest: /etc/sshkeys.local/rsnapshot.pub
+    owner: root
+    group: root
+    mode: 0644
+
+- name: copy sudoers config to /etc/sudoers.d/rsnapshot
+  ansible.builtin.copy:
+    src: rsnapshot-sudoers
+    dest: /etc/sudoers.d/rsnapshot
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Copy rsync-wrapper.sh to /home/rsnapshot
+  ansible.builtin.copy:
+    src: rsync-wrapper.sh
+    dest: /home/rsnapshot/rsync-wrapper.sh
+    owner: rsnapshot
+    group: rsnapshot
+    mode: 0700
