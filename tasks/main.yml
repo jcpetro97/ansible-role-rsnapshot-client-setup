@@ -32,7 +32,7 @@
     dest: /etc/sudoers.d/rsnapshot
     owner: root
     group: root
-    mode: 0644
+    mode: 0440
 
 - name: Copy rsync-wrapper.sh to /home/rsnapshot
   ansible.builtin.copy:
