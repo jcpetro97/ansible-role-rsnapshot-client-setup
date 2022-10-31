@@ -8,10 +8,12 @@ Requirements
 
 `ssh-cert-auth` should be run before this role, so that the directories needed for ssh key authorization exist.
 
+`rsnapshot_ssh_pub` - This variable needs to be set since the role uses ssh keys for system access during the backup.
+
 Role Variables
 --------------
 
-None
+**rsnapshot_ssh_pub** - This is the ssh public key that will be used to log into the client.  
 
 Dependencies
 ------------
