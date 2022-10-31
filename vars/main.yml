@@ -1,2 +1,2 @@
 ---
-# vars file for rsnapshot-client-setup
+rsnapshot_ssh_pub: []

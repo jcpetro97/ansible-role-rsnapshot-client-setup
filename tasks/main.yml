@@ -19,8 +19,8 @@
     password: '!'
 
 - name: copy ssh public key to client
-  ansible.builtin.copy:
-    src: rsnapshot.pub
+  ansible.builtin.template:
+    src: rsnapshot.pub.j2
     dest: /etc/sshkeys.local/rsnapshot.pub
     owner: root
     group: root
