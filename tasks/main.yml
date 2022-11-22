@@ -18,6 +18,14 @@
     create_home: yes
     password: '!'
 
+- name: Create the /etc/sshkeys directory
+  ansible.builtin.file:
+    path: /etc/sshkeys
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
 - name: copy ssh public key to client
   ansible.builtin.template:
     src: rsnapshot.pub.j2
