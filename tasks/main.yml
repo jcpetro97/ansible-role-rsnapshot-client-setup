@@ -18,9 +18,9 @@
     create_home: yes
     password: '!'
 
-- name: Create the /etc/sshkeys directory
+- name: Create the /etc/sshkeys.local directory
   ansible.builtin.file:
-    path: /etc/sshkeys
+    path: /etc/sshkeys.local
     state: directory
     owner: root
     group: root
